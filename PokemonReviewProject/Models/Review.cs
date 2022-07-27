@@ -11,9 +11,9 @@ namespace PokemonReviewProject.Models
 
         public int Rating { get; set; }
 
-        public Pokemon Pokemon { get; set; } // One to Many One side
+        public  Pokemon Pokemon { get; set; } // One to Many One side
 
-        public Reviewer Reviewer { get; set; } // one to Many One side
+        public  Reviewer Reviewer { get; set; } // one to Many One side
         
     }
 }

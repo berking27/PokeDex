@@ -3,6 +3,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using PokemonReviewProject.DTOs;
 using PokemonReviewProject.Models;
+using PokemonReviewProject.Repository.CountryFile;
 using PokemonReviewProject.Repository.OwnerFile;
 
 namespace PokemonReviewProject.Controllers
@@ -15,11 +16,13 @@ namespace PokemonReviewProject.Controllers
     {
         private readonly IOwnerRepository _ownerRepository;
         private readonly IMapper _mapper;
+        private readonly ICountryRepository _countryRepository;
 
-        public OwnerController(IOwnerRepository ownerRepository, IMapper mapper)
+        public OwnerController(IOwnerRepository ownerRepository, IMapper mapper, ICountryRepository countryRepository)
         {
             _ownerRepository = ownerRepository;
             _mapper = mapper;
+            _countryRepository = countryRepository;
         }
 
         [HttpGet]
@@ -76,7 +79,41 @@ namespace PokemonReviewProject.Controllers
 
         }
 
+        [HttpPost]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult CreateOwner([FromQuery] int countryId, [FromBody] OwnerDto ownerCreate)
+        {
+            if (ownerCreate == null)
+                return BadRequest(ModelState);
 
+            var owners = _ownerRepository.GetOwners()
+                .Where(c => c.LastName.Trim().ToUpper() == ownerCreate.LastName.TrimEnd().ToUpper())
+                .FirstOrDefault();
+
+            if (owners != null)
+            {
+                ModelState.AddModelError("", "Owner already exists");
+                return StatusCode(422, ModelState);
+            }
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var ownerMap = _mapper.Map<Owner>(ownerCreate);
+
+            ownerMap.Country = _countryRepository.GetCountry(countryId);
+            //We add Country Because of foreign key things
+
+
+            if (!_ownerRepository.CreateOwner(ownerMap))
+            {
+                ModelState.AddModelError("", "Something went wrong while savin");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("Successfully created");
+        }
 
     }
 }

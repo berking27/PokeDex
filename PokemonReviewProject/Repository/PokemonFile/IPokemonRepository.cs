@@ -15,6 +15,13 @@ namespace PokemonReviewProject.Repository.PokemonFile
 
         bool PokemonExist(int pokeId);
 
+        //Depends on the relations and join tables.
+        //We can say put paramaters according to One/Many relations
+        //Here Owner/Category is in many Relation. You can memorize by this way.
+        bool CreatePokemon(int ownerId , int categoryId , Pokemon pokemon);
+
+        bool Save();
+
        
     }
 }

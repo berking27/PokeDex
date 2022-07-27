@@ -5,13 +5,17 @@ namespace PokemonReviewProject.Repository.ReviewerFile
 {
     public interface IReviewerRepository
     {
-        ICollection<Reviewer> GetReviwers();
+        ICollection<Reviewer> GetReviewers();
 
         Reviewer GetReviewer(int reviewerId);
 
         ICollection<Review> GetReviewsByReviewer(int reviewerId);
 
         bool ReviewerExists(int reviwerId);
+
+        bool CreateReviewer(Reviewer reviewer);
+
+        bool Save();
     }
 }
 

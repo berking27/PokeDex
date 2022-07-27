@@ -12,6 +12,10 @@ namespace PokemonReviewProject.Repository.ReviewFile
         ICollection<Review> GetReviewsOfAPokemon(int pokeId);
 
         bool ReviewExists(int reviewId);
+
+        bool CreateReview(int reviewerId,int pokeId ,Review review);
+
+        bool Save();
     }
 }
 

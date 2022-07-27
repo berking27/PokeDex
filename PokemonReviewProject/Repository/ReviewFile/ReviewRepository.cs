@@ -16,6 +16,12 @@ namespace PokemonReviewProject.Repository.ReviewFile
             _mapper = mapper;
         }
 
+        public bool CreateReview(int reviewerId,int pokeId ,Review review)
+        {
+            _context.Add(review);
+            return Save();
+        }
+
         public Review GetReview(int reviewId)
         {
             return _context.Reviews.Where(r => r.Id == reviewId).FirstOrDefault();
@@ -36,6 +42,11 @@ namespace PokemonReviewProject.Repository.ReviewFile
             return _context.Reviews.Any(r => r.Id == reviewId);
         }
 
+        public bool Save()
+        {
+            var saved = _context.SaveChanges();
+            return saved > 0 ? true : false;
+        }
     }
 }
 

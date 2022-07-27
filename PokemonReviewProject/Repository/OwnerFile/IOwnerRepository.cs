@@ -15,6 +15,10 @@ namespace PokemonReviewProject.Repository.OwnerFile
 
         bool OwnerExists(int ownerId);
 
+        bool CreateOwner(Owner owner);
+
+        bool Save();
+
     }
 }
 

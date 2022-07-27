@@ -16,6 +16,12 @@ namespace PokemonReviewProject.Repository.OwnerFile
             _mapper = mapper;
         }
 
+        public bool CreateOwner(Owner owner)
+        {
+            _context.Add(owner);
+            return Save();
+        }
+
         public Owner GetOwner(int ownerId)
         {
             return _context.Owners.Where(o => o.Id == ownerId).FirstOrDefault();
@@ -39,6 +45,12 @@ namespace PokemonReviewProject.Repository.OwnerFile
         public bool OwnerExists(int ownerId)
         {
             return _context.Owners.Any(o => o.Id == ownerId);
+        }
+
+        public bool Save()
+        {
+            var saved = _context.SaveChanges();
+            return saved > 0 ? true : false;
         }
     }
 }

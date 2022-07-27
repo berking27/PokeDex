@@ -1,5 +1,4 @@
-﻿using System;
-using PokemonReviewProject.Models;
+﻿using PokemonReviewProject.Models;
 
 namespace PokemonReviewProject.Repository.CategoryFile
 {
@@ -13,6 +12,11 @@ namespace PokemonReviewProject.Repository.CategoryFile
 
         bool CategoryExist(int id);
 
+        bool CreateCategory(Category category);
+
+        bool UpdateCategory(Category category);
+
+        bool Save();
     }
 }
 
