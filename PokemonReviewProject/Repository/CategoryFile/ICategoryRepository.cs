@@ -16,6 +16,8 @@ namespace PokemonReviewProject.Repository.CategoryFile
 
         bool UpdateCategory(Category category);
 
+        bool DeleteCategory(Category category); 
+
         bool Save();
     }
 }

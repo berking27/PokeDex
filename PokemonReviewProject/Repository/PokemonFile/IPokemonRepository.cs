@@ -20,6 +20,10 @@ namespace PokemonReviewProject.Repository.PokemonFile
         //Here Owner/Category is in many Relation. You can memorize by this way.
         bool CreatePokemon(int ownerId , int categoryId , Pokemon pokemon);
 
+        bool UpdatePokemon(int ownerId, int categoryId , Pokemon pokemon);
+
+        bool DeletePokemon(Pokemon pokemon);
+
         bool Save();
 
        

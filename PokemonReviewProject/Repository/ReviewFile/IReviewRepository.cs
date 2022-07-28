@@ -13,7 +13,11 @@ namespace PokemonReviewProject.Repository.ReviewFile
 
         bool ReviewExists(int reviewId);
 
-        bool CreateReview(int reviewerId,int pokeId ,Review review);
+        bool CreateReview(Review review);
+
+        bool UpdateReview(Review review);
+
+        bool DeleteReview(Review review);
 
         bool Save();
     }
